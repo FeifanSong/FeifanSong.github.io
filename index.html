@@ -73,30 +73,28 @@
             display: inline-block;
         }
 
-/*         .section {
-            padding: 30px 40px;
-            border-bottom: 1px solid #eee;
-            position: relative;
-            overflow: hidden;
-        }
- */
         .section {
-            padding: 30px 40px;
-            border-bottom: 1px solid #eee;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s ease;
-            /* 添加高度和溢出控制 */
-            min-height: 500px;
-            display: flex;
-            align-items: flex-start;
+    padding: 30px 40px;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    overflow: hidden;
+    min-height: 600px; /* 添加最小高度 */
+    display: flex;
+    align-items: flex-start;
 }
         
-/*         .section:last-child {
+        .section:last-child {
             border-bottom: none;
         }
- */
-/*         .section-bg {
+
+/*      .section {
+            padding: 30px 40px;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            overflow: hidden;
+        }
+   
+        .section-bg {
             position: absolute;
             bottom: 0;
             left: 0;
@@ -107,55 +105,56 @@
             opacity: 0.15;
             z-index: 0;
             transition: opacity 0.5s ease;
-        } */
-
-        /* 确保初始状态图片完全可见 */
-        .section:first-child .section-content {
-               margin-top: 300px; /* 第一个模块的内容初始位置更低 */}
-        
-        .section:nth-child(2) .section-content {margin-top: 250px;}
-
-         /* 后续模块逐渐减少初始间距 */
-        .section:nth-child(n+3) .section-content {margin-top: 200px;}
-
-        .section-bg {
-            position: absolute;
-            top: 0; /* 改为顶部 */
-            left: 0;
-            width: 100%;
-            height: 100%; /* 改为全高 */
-            background-size: cover;
-            background-position: center;
-            opacity: 0.8; /* 增加不透明度 */
-            z-index: 1; /* 降低z-index */
-            transition: opacity 0.5s ease, transform 0.5s ease;
-            border-radius: 0; /* 移除圆角 */
         }
-
-        .section:hover .section-bg {
-            opacity: 0.2;
-        }
-
-/*         .section-content {
+        .section-content {
             position: relative;
             z-index: 2;
             transition: transform 0.3s ease;
-        } */
+        } 
+*/
 
-        .section-content {
+        .section-bg {
+    position: absolute;
+    top: 50%; /* 居中定位 */
+    left: 50%;
+    width: 90%; /* 与内容区域同宽 */
+    height: auto; /* 保持比例 */
+    max-width: 1000px; /* 最大宽度与内容区域一致 */
+    background-size: cover;
+    background-position: center;
+    opacity: 0.8;
+    z-index: 1;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    border-radius: 10px; /* 与内容区域相同的圆角 */
+    transform: translate(-50%, -50%); /* 居中 */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); /* 添加阴影 */
+}
+
+.section-content {
     position: relative;
-    z-index: 3; /* 增加z-index确保在图片上方 */
+    z-index: 3;
     transition: transform 0.3s ease;
-    background: rgba(255, 255, 255, 0.95); /* 增加不透明度 */
+    background: rgba(255, 255, 255, 0.95);
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-    margin-top: 100px; /* 初始位置在图片下方 */
+    margin-top: 100px;
     width: 90%;
     max-width: 1000px;
     margin-left: auto;
     margin-right: auto;
 }
+
+/* 移除之前的margin-top设置 */
+.section:first-child .section-content,
+.section:nth-child(2) .section-content,
+.section:nth-child(n+3) .section-content {
+    margin-top: 100px; /* 统一初始位置 */
+}
+
+        .section:hover .section-bg {
+            opacity: 0.2;
+        }
 
         .section:hover .section-content {
             transform: translateY(-5px);
@@ -684,7 +683,7 @@
     </div>
 
     <script>
-        // Add smooth scrolling and animation effects
+        // // Add smooth scrolling and animation effects
         // document.addEventListener('DOMContentLoaded', function() {
         //     const sections = document.querySelectorAll('.section');
             
@@ -697,50 +696,74 @@
         //         });
         //     });
 
-        // 添加视差滚动效果
-    document.addEventListener('scroll', function() {
-    const sections = document.querySelectorAll('.section');
-    const scrollPosition = window.scrollY;
-    
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.offsetHeight;
-        
-        // 计算滚动进度
-        const scrollProgress = (scrollPosition - sectionTop + window.innerHeight) / (window.innerHeight + sectionHeight);
-        
-        if (scrollProgress > 0 && scrollProgress < 1) {
-            const content = section.querySelector('.section-content');
-            // 根据滚动位置调整内容位置
-            const translateY = Math.max(0, 100 - (scrollProgress * 150));
-            content.style.transform = `translateY(${translateY}px)`;
-            
-            // 调整背景透明度
-            const bg = section.querySelector('.section-bg');
-            bg.style.opacity = Math.max(0.3, 0.8 - (scrollProgress * 0.6));
-        }
-        });
-        });
+        // // 修改视差滚动效果
 
-            sections.forEach(section => {
-                section.style.opacity = '0';
-                section.style.transform = 'translateY(20px)';
-                section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                observer.observe(section);
-            });
+        //     sections.forEach(section => {
+        //         section.style.opacity = '0';
+        //         section.style.transform = 'translateY(20px)';
+        //         section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        //         observer.observe(section);
+        //     });
 
-            // 添加鼠标悬停效果
-            const sectionContents = document.querySelectorAll('.section-content');
-            sectionContents.forEach(content => {
-                content.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-5px)';
-                });
+        //     // 添加鼠标悬停效果
+        //     const sectionContents = document.querySelectorAll('.section-content');
+        //     sectionContents.forEach(content => {
+        //         content.addEventListener('mouseenter', function() {
+        //             this.style.transform = 'translateY(-5px)';
+        //         });
                 
-                content.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0)';
-                });
+        //         content.addEventListener('mouseleave', function() {
+        //             this.style.transform = 'translateY(0)';
+        //         });
+        //     });
+        // });
+    // 修改视差滚动效果
+    document.addEventListener('scroll', function() {
+        const sections = document.querySelectorAll('.section');
+        const scrollPosition = window.scrollY;
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            
+            // 计算滚动进度
+            const scrollProgress = (scrollPosition - sectionTop + window.innerHeight) / (window.innerHeight + sectionHeight);
+            
+            if (scrollProgress > 0 && scrollProgress < 1) {
+                const content = section.querySelector('.section-content');
+                const bg = section.querySelector('.section-bg');
+                
+                // 内容向上移动覆盖图片
+                const translateY = Math.max(0, 100 - (scrollProgress * 120));
+                content.style.transform = `translateY(${translateY}px)`;
+                
+                // 图片逐渐变淡并稍微缩小
+                bg.style.opacity = Math.max(0.2, 0.8 - (scrollProgress * 0.7));
+                bg.style.transform = `translate(-50%, -50%) scale(${Math.max(0.9, 1 - (scrollProgress * 0.1))})`;
+            }
+        });
+    });
+
+    // 添加滚动动画效果
+    document.addEventListener('DOMContentLoaded', function() {
+        const sections = document.querySelectorAll('.section');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
             });
         });
-    </script>
+
+        sections.forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+    });
+</script>
 </body>
 </html>
