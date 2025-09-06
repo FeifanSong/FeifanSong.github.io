@@ -633,87 +633,41 @@
     </div>
 
     <script>
-        // // Add smooth scrolling and animation effects
-        // document.addEventListener('DOMContentLoaded', function() {
-        //     const sections = document.querySelectorAll('.section');
+        // Add smooth scrolling and animation effects
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.section');
             
-        //     const observer = new IntersectionObserver((entries) => {
-        //         entries.forEach(entry => {
-        //             if (entry.isIntersecting) {
-        //                 entry.target.style.opacity = '1';
-        //                 entry.target.style.transform = 'translateY(0)';
-        //             }
-        //         });
-        //     });
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
 
-        // // 修改视差滚动效果
+        // 修改视差滚动效果
 
-        //     sections.forEach(section => {
-        //         section.style.opacity = '0';
-        //         section.style.transform = 'translateY(20px)';
-        //         section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        //         observer.observe(section);
-        //     });
+            sections.forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(section);
+            });
 
-        //     // 添加鼠标悬停效果
-        //     const sectionContents = document.querySelectorAll('.section-content');
-        //     sectionContents.forEach(content => {
-        //         content.addEventListener('mouseenter', function() {
-        //             this.style.transform = 'translateY(-5px)';
-        //         });
+            // 添加鼠标悬停效果
+            const sectionContents = document.querySelectorAll('.section-content');
+            sectionContents.forEach(content => {
+                content.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
                 
-        //         content.addEventListener('mouseleave', function() {
-        //             this.style.transform = 'translateY(0)';
-        //         });
-        //     });
-        // });
-    // 修改视差滚动效果
-    document.addEventListener('scroll', function() {
-        const sections = document.querySelectorAll('.section');
-        const scrollPosition = window.scrollY;
-        
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.offsetHeight;
-            
-            // 计算滚动进度
-            const scrollProgress = (scrollPosition - sectionTop + window.innerHeight) / (window.innerHeight + sectionHeight);
-            
-            if (scrollProgress > 0 && scrollProgress < 1) {
-                const content = section.querySelector('.section-content');
-                const bg = section.querySelector('.section-bg');
-                
-                // 内容向上移动覆盖图片
-                const translateY = Math.max(0, 100 - (scrollProgress * 120));
-                content.style.transform = `translateY(${translateY}px)`;
-                
-                // 图片逐渐变淡并稍微缩小
-                bg.style.opacity = Math.max(0.2, 0.8 - (scrollProgress * 0.7));
-                bg.style.transform = `translate(-50%, -50%) scale(${Math.max(0.9, 1 - (scrollProgress * 0.1))})`;
-            }
-        });
-    });
-
-    // 添加滚动动画效果
-    document.addEventListener('DOMContentLoaded', function() {
-        const sections = document.querySelectorAll('.section');
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
+                content.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
             });
         });
 
-        sections.forEach(section => {
-            section.style.opacity = '0';
-            section.style.transform = 'translateY(20px)';
-            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(section);
-        });
-    });
 </script>
 </body>
 </html>
