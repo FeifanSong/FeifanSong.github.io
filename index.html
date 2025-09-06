@@ -73,18 +73,30 @@
             display: inline-block;
         }
 
-        .section {
+/*         .section {
             padding: 30px 40px;
             border-bottom: 1px solid #eee;
             position: relative;
             overflow: hidden;
         }
-
-        .section:last-child {
+ */
+        .section {
+            padding: 30px 40px;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            /* 添加高度和溢出控制 */
+            min-height: 500px;
+            display: flex;
+            align-items: flex-start;
+}
+        
+/*         .section:last-child {
             border-bottom: none;
         }
-
-        .section-bg {
+ */
+/*         .section-bg {
             position: absolute;
             bottom: 0;
             left: 0;
@@ -95,17 +107,55 @@
             opacity: 0.15;
             z-index: 0;
             transition: opacity 0.5s ease;
+        } */
+
+        /* 确保初始状态图片完全可见 */
+        .section:first-child .section-content {
+               margin-top: 300px; /* 第一个模块的内容初始位置更低 */}
+        
+        .section:nth-child(2) .section-content {margin-top: 250px;}
+
+         /* 后续模块逐渐减少初始间距 */
+        .section:nth-child(n+3) .section-content {margin-top: 200px;}
+
+        .section-bg {
+            position: absolute;
+            top: 0; /* 改为顶部 */
+            left: 0;
+            width: 100%;
+            height: 100%; /* 改为全高 */
+            background-size: cover;
+            background-position: center;
+            opacity: 0.8; /* 增加不透明度 */
+            z-index: 1; /* 降低z-index */
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            border-radius: 0; /* 移除圆角 */
         }
 
         .section:hover .section-bg {
             opacity: 0.2;
         }
 
-        .section-content {
+/*         .section-content {
             position: relative;
             z-index: 2;
             transition: transform 0.3s ease;
-        }
+        } */
+
+        .section-content {
+    position: relative;
+    z-index: 3; /* 增加z-index确保在图片上方 */
+    transition: transform 0.3s ease;
+    background: rgba(255, 255, 255, 0.95); /* 增加不透明度 */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    margin-top: 100px; /* 初始位置在图片下方 */
+    width: 90%;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
 
         .section:hover .section-content {
             transform: translateY(-5px);
@@ -341,7 +391,7 @@
         <!-- Education Section -->
         <div class="section fade-in">
          <!--<div class="section-bg" style="background-image: url('img/Publication&patents.png');"></div> -->
-             <div class="section-bg" style="background-image: url('img/Beginning.png');"></div>
+             <div class="section-bg" style="background-image: url('img/Beginning.jpg');"></div>
             <div class="section-content">
                 <h2 class="section-title">🎓 EDUCATION</h2>
                 <div class="education-item">
@@ -387,7 +437,7 @@
 
         <!-- Research Experience Section -->
         <div class="section fade-in">
-            <div class="section-bg" style="background-image: url('img/Research Experience.png');"></div>
+            <div class="section-bg" style="background-image: url('img/Research Experience.jpg');"></div>
             <div class="section-content">
                 <h2 class="section-title">🔬 RESEARCH EXPERIENCES</h2>
                 <div class="research-section">
@@ -554,7 +604,7 @@
 
         <!-- Skills & Interests Section -->
         <div class="section fade-in">
-            <div class="section-bg" style="background-image: url('img/skills&Interest.png');"></div>
+            <div class="section-bg" style="background-image: url('img/skills&Interest.jpg');"></div>
             <div class="section-content">
                 <h2 class="section-title">💡 SKILLS & INTERESTS</h2>
                 <div class="skills-section">
@@ -585,7 +635,7 @@
 
         <!-- International Summer Programs Section -->
         <div class="section fade-in">
-            <div class="section-bg" style="background-image: url('img/International summer programs.png');"></div>
+            <div class="section-bg" style="background-image: url('img/International summer programs.jpg');"></div>
             <div class="section-content">
                 <h2 class="section-title">🌍 INTERNATIONAL SUMMER PROGRAMS</h2>
                 <div class="international-section">
@@ -603,7 +653,7 @@
 
         <!-- Extracurricular Activities Section -->
         <div class="section fade-in">
-            <div class="section-bg" style="background-image: url('img/Extracurricular activity.png');"></div>
+            <div class="section-bg" style="background-image: url('img/Extracurricular activity.jpg');"></div>
             <div class="section-content">
                 <h2 class="section-title">🎭 EXTRACURRICULAR ACTIVITIES</h2>
                 <div class="extracurricular-section">
@@ -635,17 +685,42 @@
 
     <script>
         // Add smooth scrolling and animation effects
-        document.addEventListener('DOMContentLoaded', function() {
-            const sections = document.querySelectorAll('.section');
+        // document.addEventListener('DOMContentLoaded', function() {
+        //     const sections = document.querySelectorAll('.section');
             
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            });
+        //     const observer = new IntersectionObserver((entries) => {
+        //         entries.forEach(entry => {
+        //             if (entry.isIntersecting) {
+        //                 entry.target.style.opacity = '1';
+        //                 entry.target.style.transform = 'translateY(0)';
+        //             }
+        //         });
+        //     });
+
+        // 添加视差滚动效果
+    document.addEventListener('scroll', function() {
+    const sections = document.querySelectorAll('.section');
+    const scrollPosition = window.scrollY;
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        
+        // 计算滚动进度
+        const scrollProgress = (scrollPosition - sectionTop + window.innerHeight) / (window.innerHeight + sectionHeight);
+        
+        if (scrollProgress > 0 && scrollProgress < 1) {
+            const content = section.querySelector('.section-content');
+            // 根据滚动位置调整内容位置
+            const translateY = Math.max(0, 100 - (scrollProgress * 150));
+            content.style.transform = `translateY(${translateY}px)`;
+            
+            // 调整背景透明度
+            const bg = section.querySelector('.section-bg');
+            bg.style.opacity = Math.max(0.3, 0.8 - (scrollProgress * 0.6));
+        }
+        });
+        });
 
             sections.forEach(section => {
                 section.style.opacity = '0';
