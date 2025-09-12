@@ -223,6 +223,22 @@
             transition: transform 0.3s ease;
         }
 
+        .section-bg {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15;
+            z-index: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .section:hover .section-bg {
+            opacity: 0.2;
+        }
 
         .education-item, .research-item, .internship-item {
             margin-bottom: 25px;
@@ -456,20 +472,15 @@
                 <div class="section-content">
                     <div class="content-item fade-in">
                         <strong>[1]</strong> <strong>Feifan Song</strong>, Ziming Cheng, Lunbo Li, Haofeng Zhang. MTPNet: Learning Multiple Twin-support Prototypes for Few-shot Medical Image Segmentation. 2024 IEEE International Conference on Bioinformatics and Biomedicine (BIBM), 2024.
-                    </div>
-                    <div class="content-item fade-in">
+    
                         <strong>[2]</strong> <strong>Feifan Song</strong>, Haofeng Zhang. Leveraging Language to Generalize Few-shot Natural Image segmentation to Medical Images. Submitted to Pattern Recognition Letters, 2025.
-                    </div>
-                    <div class="content-item fade-in">
+                    
                         <strong>[3]</strong> Yuanwu Xu, <strong>Feifan Song</strong>, Haofeng Zhang. Learning Spatial Similarity Distribution for Few-shot Object Counting. International Joint Conference on Artificial Intelligence (IJCAI), 2024, arXic.2405.11770.
-                    </div>
-                    <div class="content-item fade-in">
+                    
                         <strong>[4]</strong> Yuyan Shi, Chenyi Jiang, <strong>Feifan Song</strong>, Qiaolin Ye, Yang Long, Haofeng Zhang. Multi-domain feature-enhanced attribute updater for generalized zero-shot learning. Neural Computing and Application 37, 8397–8414 (2025).
-                    </div>
-                    <div class="content-item fade-in">
+                    
                         <strong>[5]</strong> <strong>Feifan Song</strong>, Haofeng Zhang. A few-shot medical image segmentation method based on text semantic guidance. [P] 202410733385.6 (Chinese Patent)
-                    </div>
-                    <div class="content-item fade-in">
+                    
                         <strong>[6]</strong> <strong>Feifan Song</strong>, Haofeng Zhang. A few-shot medical image segmentation method based on dual attention mechanism and multi-scale fusion. [P] 202410733380.3 (Chinese Patent)
                     </div>
                 </div>
