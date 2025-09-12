@@ -144,6 +144,23 @@
             opacity: 1;
         }
 
+        .link-item {
+            margin: 15px 0;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            background-color: #f8f9fa;
+            border-radius: 0 4px 4px 0;
+        }
+        a {
+            color: #2980b9;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        a:hover {
+            color: #e74c3c;
+            text-decoration: underline;
+        }
+
         .content-wrapper {
             position: relative;
             width: 100%;
@@ -525,16 +542,16 @@
             <section id="home" class="content-section active">
                 <div class="section-header">
                     <h2 class="section-title">🎓 Feifan Song</h2>
-                </div>
-                <div class="social-links">
-                <a href="https://scholar.google.com/citations?user=-rP2rucAAAAJ&hl=zh-CN" class="social-link scholar" target="_blank">
+                    <div class="social-links">
+                    <a href="https://scholar.google.com/citations?user=-rP2rucAAAAJ&hl=zh-CN" class="social-link scholar" target="_blank">
                     <i class="fas fa-graduation-cap"></i>
                     <span class="social-tooltip">Google Scholar</span>
-                </a>
-                <a href="https://github.com/FeifanSong" class="social-link github" target="_blank">
+                    </a>
+                    <a href="https://github.com/FeifanSong" class="social-link github" target="_blank">
                     <i class="fab fa-github"></i>
                     <span class="social-tooltip">GitHub</span>
-                </a>
+                    </a>
+                    </div>
                 </div>
                 <div class="section-bg" style="background-image: url('img/Beginning.jpg');"></div>
                 <div class="section-content">
@@ -554,12 +571,36 @@
                     <h2 class="section-title">📚 PUBLICATIONS & PATENTS</h2>
                 </div>
                 <div class="section-content">
-                        <p><strong>[1]</strong> <strong>Feifan Song</strong>, Ziming Cheng, Lunbo Li, Haofeng Zhang. MTPNet: Learning Multiple Twin-support Prototypes for Few-shot Medical Image Segmentation. 2024 IEEE International Conference on Bioinformatics and Biomedicine (BIBM), 2024.</p>
+<!--                         <p><strong>[1]</strong> <strong>Feifan Song</strong>, Ziming Cheng, Lunbo Li, Haofeng Zhang. MTPNet: Learning Multiple Twin-support Prototypes for Few-shot Medical Image Segmentation. 2024 IEEE International Conference on Bioinformatics and Biomedicine (BIBM), 2024.</p>
                         <p><strong>[2]</strong> <strong>Feifan Song</strong>, Haofeng Zhang. Leveraging Language to Generalize Few-shot Natural Image segmentation to Medical Images. Submitted to Pattern Recognition Letters, 2025.</p>
                         <p><strong>[3]</strong> Yuanwu Xu, <strong>Feifan Song</strong>, Haofeng Zhang. Learning Spatial Similarity Distribution for Few-shot Object Counting. International Joint Conference on Artificial Intelligence (IJCAI), 2024, arXic.2405.11770.</p>
                         <p><strong>[4]</strong> Yuyan Shi, Chenyi Jiang, <strong>Feifan Song</strong>, Qiaolin Ye, Yang Long, Haofeng Zhang. Multi-domain feature-enhanced attribute updater for generalized zero-shot learning. Neural Computing and Application 37, 8397–8414 (2025).</p>
                         <p><strong>[5]</strong> <strong>Feifan Song</strong>, Haofeng Zhang. A few-shot medical image segmentation method based on text semantic guidance. [P] 202410733385.6 (Chinese Patent)</p>
-                        <p><strong>[6]</strong> <strong>Feifan Song</strong>, Haofeng Zhang. A few-shot medical image segmentation method based on dual attention mechanism and multi-scale fusion. [P] 202410733380.3 (Chinese Patent)</p>
+                        <p><strong>[6]</strong> <strong>Feifan Song</strong>, Haofeng Zhang. A few-shot medical image segmentation method based on dual attention mechanism and multi-scale fusion. [P] 202410733380.3 (Chinese Patent)</p> -->
+                    <div class="publication-item">
+                        <strong>[1]</strong> <strong>Feifan Song</strong>, Ziming Cheng, Lunbo Li, Haofeng Zhang. MTPNet: Learning Multiple Twin-support Prototypes for Few-shot Medical Image Segmentation. 2024 IEEE International Conference on Bioinformatics and Biomedicine (BIBM), 2024.
+                        <div class="link-item">
+                            <a href="https://ieeexplore.ieee.org/abstract/document/10821941/">paper</a>
+                            <a href="https://github.com/Lilacis/CD_TG">github</a>
+                        </div>
+                    </div>
+                    <div class="publication-item">
+                        <strong>[2]</strong> <strong>Feifan Song</strong>, Haofeng Zhang. Leveraging Language to Generalize Few-shot Natural Image segmentation to Medical Images. Submitted to Pattern Recognition Letters, 2025.
+                        
+                    </div>
+                    <div class="publication-item">
+                        <strong>[3]</strong> Yuanwu Xu, <strong>Feifan Song</strong>, Haofeng Zhang. Learning Spatial Similarity Distribution for Few-shot Object Counting. International Joint Conference on Artificial Intelligence (IJCAI), 2024, arXic.2405.11770.
+                    </div>
+                    <div class="publication-item">
+                        <strong>[4]</strong> Yuyan Shi, Chenyi Jiang, <strong>Feifan Song</strong>, Qiaolin Ye, Yang Long, Haofeng Zhang. Multi-domain feature-enhanced attribute updater for generalized zero-shot learning. Neural Computing and Application 37, 8397–8414 (2025).
+                    </div>
+                    <div class="publication-item">
+                        <strong>[5]</strong> <strong>Feifan Song</strong>, Haofeng Zhang. A few-shot medical image segmentation method based on text semantic guidance. [P] 202410733385.6 (Chinese Patent)
+                    </div>
+                    <div class="publication-item">
+                        <strong>[6]</strong> <strong>Feifan Song</strong>, Haofeng Zhang. A few-shot medical image segmentation method based on dual attention mechanism and multi-scale fusion. [P] 202410733380.3 (Chinese Patent)
+                    </div>
+
                 </div>
             </section>
 
@@ -795,13 +836,13 @@
                         <h3>Deputy Director | Drama Troupe of NJUST</h3>
                         <span class="date">2023</span>
                     </div>
-                </div>
-            <!-- 添加的自适应文字框 -->
-            <div class="memory-text">
-            <p>In China, I not only received a rigorous education in theatrical theory, but also immersed myself as a stage manager and director in the entire journey of multiple plays—from conception to performance. This was far more than a casual pastime; it is a devotion rooted in profound love.
 
-                “I see those endless, bustling crowds—appearing and vanishing. Struggle, monotony, humility, and poverty are drama; generosity, radiance, pride, and wealth are theatre. For humanity, in its perpetual ignorance, forever breeds conflict; and because all must eventually fade, there will always be climax.” Thus I wrote in my director’s journal.</p>
-            </div>  
+                    <div class="research-item">
+                        <p>In China, I not only received a rigorous education in theatrical theory, but also immersed myself as a stage manager and director in the entire journey of multiple plays—from conception to performance. This was far more than a casual pastime; it is a devotion rooted in profound love.
+                            “I see those endless, bustling crowds—appearing and vanishing. Struggle, monotony, humility, and poverty are drama; generosity, radiance, pride, and wealth are theatre. For humanity, in its perpetual ignorance, forever breeds conflict; and because all must eventually fade, there will always be climax.” Thus I wrote in my director’s journal.</p>
+                    </div>
+                    
+                </div>  
             </section>
         </div>
     </div>
