@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Portfolio - Feifan Song</title>
+    <title>Feifan Song - Interactive Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -18,13 +18,15 @@
             color: #333;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            overflow-x: hidden;
+            overflow: hidden;
         }
 
         /* 导航栏样式 */
         .navbar {
-            position: sticky;
+            position: fixed;
             top: 0;
+            left: 0;
+            right: 0;
             z-index: 1000;
             background: rgba(44, 62, 80, 0.95);
             backdrop-filter: blur(10px);
@@ -79,180 +81,81 @@
             border-radius: 3px;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 0 30px rgba(0,0,0,0.1);
-            border-radius: 10px;
+        /* 主内容容器 */
+        .main-container {
+            position: absolute;
+            top: 60px;
+            bottom: 0;
+            left: 0;
+            right: 0;
             overflow: hidden;
-            margin-top: 20px;
-            margin-bottom: 20px;
         }
 
-        .header {
+        .content-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* 内容部分样式 */
+        .content-section {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            overflow-y: auto;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.1);
+        }
+
+        .content-section.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
             background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
             color: white;
-            padding: 40px;
-            text-align: center;
+            border-radius: 10px;
             position: relative;
         }
 
-        .header::before {
+        .section-header::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('img/Beginning.jpg') center/cover;
-            background-position: 25% 30%;;
+            background: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover;
             opacity: 0.2;
-            z-index: 1;
-        }
-
-        .header-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .header h1 {
-            font-size: 3em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .contact-info {
-            font-size: 1.1em;
-            margin-top: 20px;
-        }
-
-        .contact-info span {
-            margin: 0 15px;
-            display: inline-block;
-        }
-        
-        .section:last-child {
-            border-bottom: none;
-        }
-
-        .section {
-            padding: 30px 40px;
-            border-bottom: 1px solid #eee;
-            position: relative;
-            overflow: hidden;
-            scroll-margin-top: 70px;
-        }
-   
-        .section-bg {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 40%;
-            background-size: cover;
-            background-position: center;
-            opacity: 0.15;
-            z-index: 0;
-            transition: opacity 0.5s ease;
-        }
-        .section-content {
-            position: relative;
-            z-index: 2;
-            transition: transform 0.3s ease;
-        } 
-
-        .section:hover .section-bg {
-            opacity: 0.2;
-        }
-
-        .section:hover .section-content {
-            transform: translateY(-5px);
+            border-radius: 10px;
         }
 
         .section-title {
-            font-size: 2em;
-            color: #2c3e50;
-            margin-bottom: 20px;
-            border-bottom: 3px solid #3498db;
-            padding-bottom: 10px;
-            display: flex;
-            align-items: center;
-        }
-
-        .section-image {
-            width: 60px;
-            height: 60px;
-            object-fit: cover;
-            border-radius: 50%;
-            margin-right: 15px;
-            border: 3px solid #3498db;
-        }
-
-        .section-with-image {
+            font-size: 2.5em;
+            margin-bottom: 10px;
             position: relative;
-            display: flex;
-            align-items: flex-start;
-            gap: 30px;
-            margin: 30px 0;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border: 1px solid rgba(52, 152, 219, 0.1);
+            z-index: 2;
         }
 
-        .section-with-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #3498db, #9b59b6, #e74c3c, #f39c12);
-            border-radius: 15px 15px 0 0;
+        .section-content {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .section-image-container {
-            flex-shrink: 0;
-            width: 250px;
-            height: 200px;
-        }
-
-        .section-image-large {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            border: 2px solid rgba(52, 152, 219, 0.3);
-            transition: transform 0.3s ease;
-        }
-
-        .memory-text {
-    margin-top: 20px;
-    padding: 25px;
-    background: rgba(255, 255, 255, 0.92);
-    border-radius: 12px;
-    border-left: 4px solid #3498db;
-    width: 100%;
-    max-width: 1000px;
-    margin-left: auto;
-    margin-right: auto;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    line-height: 1.7;
-}
-
-.memory-text p {
-    font-style: italic;
-    color: #444;
-    margin: 0;
-    font-size: 1.05em;
-    text-align: justify;
-}
-
-
-        .education-item, .research-item, .internship-item {
+        /* 内容项样式 */
+        .content-item {
             margin-bottom: 25px;
             padding: 20px;
             background: #f8f9fa;
@@ -261,12 +164,12 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .education-item:hover, .research-item:hover, .internship-item:hover {
+        .content-item:hover {
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
-        .education-item h3, .research-item h3, .internship-item h3 {
+        .content-item h3 {
             color: #2c3e50;
             margin-bottom: 10px;
         }
@@ -287,135 +190,14 @@
             margin: 5px 0;
         }
 
-        .publications-section {
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            padding: 20px;
-        }
-
-        .publication-item {
-            margin-bottom: 15px;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 5px;
-            border-left: 3px solid #e74c3c;
-            transition: transform 0.3s ease;
-        }
-
-        .publication-item:hover {
-            transform: translateX(5px);
-        }
-
-        .research-section {
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            padding: 20px;
-        }
-
-        .skills-section {
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            padding: 20px;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .skill-category {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 15px;
-            border-radius: 8px;
-            border-left: 4px solid #9b59b6;
-            transition: transform 0.3s ease;
-        }
-
-        .skill-category:hover {
-            transform: translateY(-3px);
-        }
-
-        .skill-category h4 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-
-        .international-section {
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            padding: 20px;
-        }
-
-        .extracurricular-section {
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            padding: 20px;
-        }
-
-        .awards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .award-category {
-            background: #fff3cd;
-            padding: 15px;
-            border-radius: 8px;
-            border-left: 4px solid #ffc107;
-            transition: transform 0.3s ease;
-        }
-
-        .award-category:hover {
-            transform: translateY(-3px);
-        }
-
-        .award-item {
-            margin-bottom: 10px;
-            padding: 8px 0;
-            border-bottom: 1px solid #f0f0f0;
-        }
-
-        .award-item:last-child {
-            border-bottom: none;
-        }
-
         .highlight {
             background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
             padding: 2px 6px;
             border-radius: 3px;
         }
 
+        /* 响应式设计 */
         @media (max-width: 768px) {
-            .container {
-                margin: 10px;
-                border-radius: 0;
-            }
-
-            .header {
-                padding: 20px;
-            }
-
-            .header h1 {
-                font-size: 2em;
-            }
-
-            .section {
-                padding: 20px;
-            }
-
-            .contact-info span {
-                display: block;
-                margin: 5px 0;
-            }
-            
-            .section-bg {
-                height: 30%;
-            }
-            
             .nav-list {
                 flex-wrap: wrap;
                 justify-content: center;
@@ -425,15 +207,24 @@
                 padding: 12px 15px;
                 font-size: 0.9em;
             }
+            
+            .section-title {
+                font-size: 2em;
+            }
+            
+            .content-section {
+                padding: 10px;
+            }
+        }
+
+        /* 动画效果 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .fade-in {
             animation: fadeIn 0.8s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         /* 自定义滚动条 */
@@ -469,62 +260,62 @@
         </div>
     </nav>
 
-    <div class="container">
-        <!-- Home Section (原Education Section) -->
-        <div id="home" class="section fade-in">
-            <div class="section-bg" style="background-image: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');"></div>
-            <div class="section-content">
-                <h2 class="section-title">🎓 EDUCATION</h2>
-                <div class="education-item">
-                    <h3>Nanjing University of Science and Technology (Project 211)</h3>
-                    <span class="date">09. 2021 – 06. 2025</span>
-                    <div style="clear: both;"></div>
-                    <p>• Bachelor of Engineering in Computer Science and Technology</p>
-                    <div class="gpa">GPA: 3.8/4.0</div>
-                    <div class="gpa">Score: 88.8/100</div>
-                    <p>• <span class="highlight">Qian Xuesen College (Honors College)</span> | Academic Rank: Top 8% (in major), Top 10% (in college)</p>
-                    <p>• <strong>Core Courses:</strong> Mathematical Analysis, Advanced Algebra, Discrete Mathematics, Data Structures, Digital Logic Circuits, Computer Organization Principles, Computer Architecture, Operating Systems, Compiler Principles, Database Basics, Computer Networks, Human-Computer Interaction, Computer Vision, Machine Learning, Image Processing and Analysis, etc.</p>
+    <!-- 主内容容器 -->
+    <div class="main-container">
+        <div class="content-wrapper">
+            <!-- Home Section -->
+            <section id="home" class="content-section active">
+                <div class="section-header">
+                    <h2 class="section-title">🎓 EDUCATION</h2>
                 </div>
-            </div>
-        </div>
+                <div class="section-content">
+                    <div class="content-item fade-in">
+                        <h3>Nanjing University of Science and Technology (Project 211)</h3>
+                        <span class="date">09. 2021 – 06. 2025</span>
+                        <div style="clear: both;"></div>
+                        <p>• Bachelor of Engineering in Computer Science and Technology</p>
+                        <div class="gpa">GPA: 3.8/4.0</div>
+                        <div class="gpa">Score: 88.8/100</div>
+                        <p>• <span class="highlight">Qian Xuesen College (Honors College)</span> | Academic Rank: Top 8% (in major), Top 10% (in college)</p>
+                        <p>• <strong>Core Courses:</strong> Mathematical Analysis, Advanced Algebra, Discrete Mathematics, Data Structures, Digital Logic Circuits, Computer Organization Principles, Computer Architecture, Operating Systems, Compiler Principles, Database Basics, Computer Networks, Human-Computer Interaction, Computer Vision, Machine Learning, Image Processing and Analysis, etc.</p>
+                    </div>
+                </div>
+            </section>
 
-        <!-- Publication Section (原Publications & Patents Section) -->
-        <div id="publication" class="section fade-in">
-            <div class="section-bg" style="background-image: url('img/Publication&patents.png');"></div>
-            <div class="section-content">
-                <h2 class="section-title">📚 PUBLICATIONS & PATENTS</h2>
-                <div class="publications-section">
-                    <div class="publication-item">
+            <!-- Publication Section -->
+            <section id="publication" class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">📚 PUBLICATIONS & PATENTS</h2>
+                </div>
+                <div class="section-content">
+                    <div class="content-item fade-in">
                         <strong>[1]</strong> <strong>Feifan Song</strong>, Ziming Cheng, Lunbo Li, Haofeng Zhang. MTPNet: Learning Multiple Twin-support Prototypes for Few-shot Medical Image Segmentation. 2024 IEEE International Conference on Bioinformatics and Biomedicine (BIBM), 2024.
                     </div>
-                    <div class="publication-item">
+                    <div class="content-item fade-in">
                         <strong>[2]</strong> <strong>Feifan Song</strong>, Haofeng Zhang. Leveraging Language to Generalize Few-shot Natural Image segmentation to Medical Images. Submitted to Pattern Recognition Letters, 2025.
                     </div>
-                    <div class="publication-item">
+                    <div class="content-item fade-in">
                         <strong>[3]</strong> Yuanwu Xu, <strong>Feifan Song</strong>, Haofeng Zhang. Learning Spatial Similarity Distribution for Few-shot Object Counting. International Joint Conference on Artificial Intelligence (IJCAI), 2024, arXic.2405.11770.
                     </div>
-                    <div class="publication-item">
+                    <div class="content-item fade-in">
                         <strong>[4]</strong> Yuyan Shi, Chenyi Jiang, <strong>Feifan Song</strong>, Qiaolin Ye, Yang Long, Haofeng Zhang. Multi-domain feature-enhanced attribute updater for generalized zero-shot learning. Neural Computing and Application 37, 8397–8414 (2025).
                     </div>
-                    <div class="publication-item">
+                    <div class="content-item fade-in">
                         <strong>[5]</strong> <strong>Feifan Song</strong>, Haofeng Zhang. A few-shot medical image segmentation method based on text semantic guidance. [P] 202410733385.6 (Chinese Patent)
                     </div>
-                    <div class="publication-item">
+                    <div class="content-item fade-in">
                         <strong>[6]</strong> <strong>Feifan Song</strong>, Haofeng Zhang. A few-shot medical image segmentation method based on dual attention mechanism and multi-scale fusion. [P] 202410733380.3 (Chinese Patent)
                     </div>
                 </div>
-            </div>
-        </div>
+            </section>
 
-        <!-- Research Section (原Research Experience Section) -->
-        <div id="research" class="section fade-in">
-            <div class="section-bg" style="background-image: url('img/Research Experience.jpg');"></div>
-            <div class="section-content">
-                <h2 class="section-title">🔬 RESEARCH EXPERIENCES</h2>
-                <div class="research-section">
-                    <p>*[1-5] Supported by: National Natural Science Foundation of China under the Grant Nos. 62371235 and 62072246</p>
-                    
-                    <div class="research-item">
+            <!-- Research Section -->
+            <section id="research" class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">🔬 RESEARCH EXPERIENCES</h2>
+                </div>
+                <div class="section-content">
+                    <div class="content-item fade-in">
                         <h3>[1] Research on Interclass Interaction Possibilities in Few-Shot Medical Image Segmentation Methods</h3>
                         <span class="date">Feb. 2024 – Feb. 2025</span>
                         <div style="clear: both;"></div>
@@ -540,7 +331,7 @@
                         </ul>
                     </div>
 
-                    <div class="research-item">
+                    <div class="content-item fade-in">
                         <h3>[2] Research on Few-shot Segmentation Task for Cross-Domain Medical Images</h3>
                         <span class="date">Dec. 2024 – Dec. 2025</span>
                         <div style="clear: both;"></div>
@@ -554,312 +345,116 @@
                             <li>The Text Generation Module (TGM) was designed, which employed GPT-4 to generate standardized domain-specific category descriptions; The Semantic-Guided Module (SM) was developed to align visual and linguistic features to form adaptive feature embeddings. Additionally, an FSS embedding interface was designed for flexible integration with existing image segmentation models.</li>
                         </ul>
                     </div>
+                </div>
+            </section>
 
-                    <div class="research-item">
-                        <h3>[3] Research on Instance-Level Attribute Adaptation for Generalized Zero-shot Learning</h3>
-                        <span class="date">Jan. 2024 – May. 2024</span>
+            <!-- CV Section -->
+            <section id="cv" class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">📄 CURRICULUM VITAE</h2>
+                </div>
+                <div class="section-content">
+                    <div class="content-item fade-in">
+                        <h3>Technical Support Engineer | CAS (Nanjing) Artificial Intelligence Innovation Research Institute</h3>
+                        <span class="date">Jul. 2024 – Sep. 2024</span>
                         <div style="clear: both;"></div>
-                        <p><strong>Role:</strong> Core Contributor</p>
-                        <p><strong>Supervisor:</strong> Haofeng Zhang, Professor</p>
-                        <p><strong>Research outcomes included: </strong> A contributing-author journal paper (NCAA).</p>
-                        <p><em><strong>Research contents:</strong> This project focuses on developing novel methods for generalized zero-shot learning (GZSL), specifically addressing the challenge of knowledge transfer from seen to unseen classes. The research investigates how to leverage multi-domain feature learning and dynamic attribute adaptation to improve visual-semantic alignment in zero-shot scenarios.</em></p>
-                        <p><strong>Key Achievements:</strong></p>
+                        <p><strong>Internship content: Utilize football expert knowledge, big data analysis, deep learning and other tools and methods to analyze and study the macro football match situation from a macro tactical and overall perspective.</strong></p>
+                        <p><strong>Core Contributions:</strong></p>
                         <ul>
-                            <li>A multi-domain feature learning system was developed to extract discriminative visual patterns by combining spatial and frequency-domain analysis, reducing feature redundancy by 30%.</li>
-                            <li>An adaptive attribute updating mechanism was created to dynamically refine class-level semantic descriptions using instance-specific visual cues, improving attribute-visual alignment by 25%.</li>
-                            <li>Comprehensive ablation studies were conducted across 3 benchmark datasets (AWA2, CUB, SUN), with hyperparameters systematically optimized.</li>
+                            <li>Developed algorithms for player/team technical-tactical evaluation and style recognition</li>
+                            <li>Systematically analyzed impact of various parameters on athletes' performance</li>
+                            <li>Pioneered application of large language models in football analytics</li>
                         </ul>
                     </div>
 
-                    <div class="research-item">
-                        <h3>[4] An Exploration of Combining Few-Shot Methods with Textual Semantic Guidance</h3>
-                        <span class="date">Mar. 2024 – Jun. 2024</span>
+                    <div class="content-item fade-in">
+                        <h3>Technical Support Engineer | Hikvision Co., Ltd.</h3>
+                        <span class="date">Jul. 2023 – Sep. 2023</span>
                         <div style="clear: both;"></div>
-                        <p><strong>Role:</strong> Lead Researcher (Independent Project Design, Implementation, and Paper Writing)</p>
-                        <p><strong>Supervisor:</strong> Haofeng Zhang, Professor</p>
-                        <p><strong>Research outcomes included: </strong> An invention patent (granted).</p>
-                        <p><em><strong>Research contents:</strong> This project aims to explore a few-shot medical image segmentation method based on textual semantic guidance, and to investigate how to add the correct guidance of organ textual semantics to eliminate the incorrect mixing of foreground and background information in image segmentation.</em></p>
-                        <p><strong>Key Achievements:</strong></p>
+                        <p><strong>Internship content: Technical support and troubleshooting for security monitoring systems, assisting customers in resolving technical issues encountered during product usage.</strong></p>
+                        <p><strong>Core Contributions:</strong></p>
                         <ul>
-                            <li>Two branches were designed in the method: in the interaction branch, the text description of the organ was added, and the Text-guided Enhancement Module (TEM) generated the guided feature map and performed similarity computation with the support prototype to obtain the prediction mask I; in the fusion branch, the guided support prototype was generated and spliced with the query feature map to generate the prediction mask II. The two masks were fused by a decoder to output the resultant image.</li>
-                        </ul>
-                    </div>
-
-                    <div class="research-item">
-                        <h3>[5] Exploration of Image Spatial Information in Few-Shot Object Counting</h3>
-                        <span class="date">Sep. 2023 – Mar. 2024</span>
-                        <div style="clear: both;"></div>
-                        <p><strong>Role:</strong> Principal Investigator (Algorithm Design & Implementation)</p>
-                        <p><strong>Supervisor:</strong> Haofeng Zhang, Professor</p>
-                        <p><strong>Research outcomes included: </strong> A second-author conference paper (IJCAI). </p>
-                        <p><em><strong>Research contents:</strong>  This project explores a new method that preserves the spatial structure of sample features and computes point-to-point similarity distribution information in a 4D similarity space, thereby improving the accuracy of few-shot object counting.</em></p>
-                        <p><strong>Key Achievements:</strong></p>
-                        <ul>
-                            <li>A network was designed and implemented based on learning 4D spatial similarity distributions, with core modules including a Similarity Learning Module (SLM) and a Feature Cross Enhancement module (FCE) for improving the accuracy of feature matching.</li>
-                            <li>A new density value prediction method was proposed by introducing a 4D convolution operation to effectively utilize the similarity distribution information. In addition, the dense distribution of targets in an image was dealt with by a dynamic image scaling method.</li>
-                            <li>Extensive experiments were conducted on several public benchmark datasets (e.g. FSC-147 and CARPK) to validate the effectiveness of the proposed methodology and to perform comparisons with existing methods.</li>
-                        </ul>
-                    </div>
-
-                    <div class="research-item">
-                        <h3>[6] Research on Super-Resolution Methods for Ultra-High-Definition Images</h3>
-                        <span class="date">Apr. 2023 – Nov. 2024</span>
-                        <div style="clear: both;"></div>
-                        <p><strong>Role:</strong>Project Leader</p>
-                        <p><strong>Supervisor:</strong> Jinshan Pan, Professor </p>
-                        <p><em><strong>Research contents:</strong> This project focuses on model algorithms for image super-resolution, the principles of deep convolutional neural networks, and studies the mechanism of the current state-of-the-art single-image super-resolution (SISR) model; it explores the reasons for the slow efficiency and large scale of the image super-resolution deep convolutional model, as well as the reasons for the super-resolution effect’s dependence on the depth of the network.</em></p>
-                        <p><strong>Key Achievements:</strong></p>
-                        <ul>
-                            <li>Large-scale outdoor scene datasets were created, with a unified and standardized collection and processing process to ensure data quality and consistency.</li>
-                            <li>A semantic-aware discriminator was developed by integrating features extracted from pretrained vision models (PVMs) such as ResNet50 and CLIP. Pixel-wise semantics were captured from intermediate PVM layers through a cross-attention mechanism, which enabled adaptive measurement of distribution distances for different semantic regions.</li>
+                            <li>Address device connectivity issues, network configuration errors, and video storage malfunctions through both remote diagnostics and on-site interventions.</li>
+                            <li>Write Technical documents and user manuals and organize common problems and solutions for customers' self-service troubleshooting capabilities.</li>
+                            <li>Assist in testing and optimizing intelligent monitoring algorithms to ensure the system's adaptability in complex environments.</li>
                         </ul>
                     </div>
                 </div>
-            </div>
-        </div>
+            </section>
 
-        <!-- CV Section (Internship + International Summer Programs + Honours & Awards) -->
-        <div id="cv" class="section fade-in">
-            <div class="section-bg" style="background-image: url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');"></div>
-            <div class="section-content">
-                <h2 class="section-title">💼 INTERNSHIPS</h2>
-                <div class="internship-item">
-                    <h3>Technical Support Engineer | CAS (Nanjing) Artificial Intelligence Innovation Research Institute</h3>
-                    <span class="date">Jul. 2024 – Sep. 2024</span>
-                    <div style="clear: both;"></div>
-                    <p><strong>Internship content: Utilize football expert knowledge, big data analysis, deep learning and other tools and methods to analyze and study the macro football match situation from a macro tactical and overall perspective.</strong></p>
-                    <p><strong>Core Contributions:</strong></p>
-                    <ul>
-                        <li>Developed algorithms for player/team technical-tactical evaluation and style recognition</li>
-                        <li>Systematically analyzed impact of various parameters on athletes' performance</li>
-                        <li>Pioneered application of large language models in football analytics</li>
-                    </ul>
+            <!-- Interest Section -->
+            <section id="interest" class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">🎭 INTERESTS & ACTIVITIES</h2>
                 </div>
-
-                <div class="internship-item">
-                    <h3>Technical Support Engineer | Hikvision Co., Ltd.</h3>
-                    <span class="date">Jul. 2023 – Sep. 2023</span>
-                    <div style="clear: both;"></div>
-                    <p><strong>Internship content: Technical support and troubleshooting for security monitoring systems, assisting customers in resolving technical issues encountered during product usage.</strong></p>
-                    <p><strong>Core Contributions:</strong></p>
-                    <ul>
-                        <li>Address device connectivity issues, network configuration errors, and video storage malfunctions through both remote diagnostics and on-site interventions.</li>
-                        <li>Write Technical documents and user manuals and organize common problems and solutions for customers' self-service troubleshooting capabilities.</li>
-                        <li>Assist in testing and optimizing intelligent monitoring algorithms to ensure the system's adaptability in complex environments.</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <!-- International Summer Programs -->
-            <div class="section-content">
-                <h2 class="section-title">🌍 INTERNATIONAL SUMMER PROGRAMS</h2>
-                <div class="section-with-image">
-                    <div class="section-content">
-                        <div class="international-section">
-                            <div class="education-item">
-                                <h3>National University of Singapore (NUS)</h3>
-                                <p><strong>Supervisor:</strong> Susanna Leong, Professor</p>
-                                <ul>
-                                    <li><strong>Jul. 2022:</strong> Robotics Automation and Intelligent Machines (Summer Course)</li>
-                                    <li><strong>Jul. 2024:</strong> Artificial Intelligence and Machine Learning (Summer Course)</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="section-image-container">
-                        <img src="img/International summer programs.jpg" alt="International Summer Programs" class="section-image-large">
-                    </div>
-                </div>
-                
-                <!-- 添加的自适应文字框 -->
-                <div class="memory-text">
-                    <p>I am extremely grateful to my fourth group at NUS for completing a final project on demographic intelligence statistics with them and ultimately receiving praise from the professor. I still remember that the five of us spent the whole night at the Starbucks outside the hotel, all full of enthusiasm. This is a wonderful memory of mine.</p>
-                </div>
-            </div>
-            
-            <!-- Honours & Awards -->
-            <div class="section-content">
-                <h2 class="section-title">🏆 HONOURS & AWARDS</h2>
-                <div class="awards-grid">
-                    <div class="award-category">
-                        <h4>🎓 Graduation Honors</h4>
-                        <div class="award-item">First-Class Honors with Distinction <span style="float: right;">06. 2025</span></div>
-                        <div class="award-item">Best Dissertation Prize <span style="float: right;">06. 2025</span></div>
-                        <div class="section-image-container">
-                            <img src="img/Graduate Honor.jpg" alt="Graduate Honor" class="section-image-large">
-                        </div>
-                    </div>
-
-                    <div class="award-category">
-                        <h4>🔢 Mathematical Modeling Competition</h4>
-                        <div class="award-item">Third Prize in the 13th MathorCup College Mathematical Modeling Challenge <span style="float: right;">06. 2023</span></div>
-                        <div class="award-item">Second Prize in the 2022 Certificate Authority Cup International MATHEMATICAL CONTEST IN MODELING <span style="float: right;">11. 2022</span></div>
-                        <div class="award-item">Third Prize in the Asia and Pacific Mathematical Contest in Modeling <span style="float: right;">11. 2022</span></div>
-                        <div class="award-item">Third Prize in May Day Mathematical Contest in Modeling <span style="float: right;">06. 2023</span></div>
-                    </div>
-
-                    <div class="award-category">
-                        <h4>💰 Scholarship</h4>
-                        <div class="award-item">Grand Prize Scholarship <span style="float: right;">03. 2025</span></div>
-                        <div class="award-item">Grand Prize Scholarship <span style="float: right;">09. 2024</span></div>
-                        <div class="award-item">Scholarship for Merit Students of NJUST <span style="float: right;">03. 2024</span></div>
-                        <div class="award-item">Scholarship for Merit Students of NJUST <span style="float: right;">09. 2023</span></div>
-                        <div class="award-item">Scholarship for Merit Students of NJUST <span style="float: right;">03. 2022</span></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Interest Section (Extracurricular Activities + Skills & Interests) -->
-        <div id="interest" class="section fade-in">
-            <div class="section-bg" style="background-image: url('img/Extracurricular activity.jpg');"></div>
-            <div class="section-content">
-                <h2 class="section-title">🎭 EXTRACURRICULAR ACTIVITIES</h2>
-                <div class="extracurricular-section">
-                    <div class="research-item">
+                <div class="section-content">
+                    <div class="content-item fade-in">
                         <h3>Stage Manager | The play 'Dedication' of NJUST</h3>
                         <span class="date">06. 2023 – 09. 2023</span>
                         <div style="clear: both;"></div>
                         <p>Grand Prize in the Long Play Category of Jiangsu Province College Students' Drama Performance Activity</p>
                     </div>
 
-                    <div class="research-item">
+                    <div class="content-item fade-in">
                         <h3>Head of the Drama Troupe | Qian Xuesen College of NJUST</h3>
                         <span class="date">09. 2022 – 06. 2023</span>
                     </div>
 
-                    <div class="research-item">
-                        <h3>Chief Director | Nanjing Arts Fund Project Theatre</h3>
-                        <span class="date">03. 2022 – 03. 2023</span>
+                    <div class="content-item fade-in">
+                        <h4>🌐 Languages</h4>
+                        <p>Chinese (Native), English (Proficient, IELTS: 7.5, GRE: 320)</p>
                     </div>
 
-                    <div class="research-item">
-                        <h3>Deputy Director | Drama Troupe of NJUST</h3>
-                        <span class="date">2023</span>
-                    </div>
-                </div>
-            </div>
-            <!-- 添加的自适应文字框 -->
-            <div class="memory-text">
-            <p>In China, I not only received a rigorous education in theatrical theory, but also immersed myself as a stage manager and director in the entire journey of multiple plays—from conception to performance. This was far more than a casual pastime; it is a devotion rooted in profound love.
-
-                “I see those endless, bustling crowds—appearing and vanishing. Struggle, monotony, humility, and poverty are drama; generosity, radiance, pride, and wealth are theatre. For humanity, in its perpetual ignorance, forever breeds conflict; and because all must eventually fade, there will always be climax.” Thus I wrote in my director’s journal.</p>
-            </div>
-            
-            <!-- Skills & Interests -->
-            <div class="section-content">
-                <h2 class="section-title">💡 SKILLS & INTERESTS</h2>
-                <div class="skills-section">
-                    <div class="skills-grid">
-                        <div class="skill-category">
-                            <h4>🌐 Languages</h4>
-                            <p>Chinese (Native), English (Proficient, IELTS: 7.5, GRE: 320)</p>
-                        </div>
-
-                        <div class="skill-category">
-                            <h4>💻 Computer Skills</h4>
-                            <p>C/C++, Python, PyTorch, MATLAB</p>
-                        </div>
-
-                        <div class="skill-category">
-                            <h4>🎓 Professional Qualifications</h4>
-                            <p>Calligraphy (Certificate, Level 10), Guzheng (Certificate, Level 10), Choreography and Directing Qualification Certificate</p>
-                        </div>
-
-                        <div class="skill-category">
-                            <h4>🎨 Interests</h4>
-                            <p>Calligraphy, music, sketching, sports</p>
-                        </div>
+                    <div class="content-item fade-in">
+                        <h4>💻 Computer Skills</h4>
+                        <p>C/C++, Python, PyTorch, MATLAB</p>
                     </div>
                 </div>
-            </div>
-        </div>           
+            </section>
+        </div>
     </div>
 
     <script>
-        // 导航栏交互功能
         document.addEventListener('DOMContentLoaded', function() {
             const navLinks = document.querySelectorAll('.nav-link');
-            const sections = document.querySelectorAll('.section');
+            const contentSections = document.querySelectorAll('.content-section');
             
-            // 平滑滚动到对应部分
+            // 初始显示Home部分
+            showSection('home');
+            
+            // 导航链接点击事件
             navLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
                     
                     const targetId = this.getAttribute('href').substring(1);
-                    const targetSection = document.getElementById(targetId);
                     
                     // 更新活动链接
                     navLinks.forEach(navLink => navLink.classList.remove('active'));
                     this.classList.add('active');
                     
-                    // 平滑滚动到目标部分
-                    window.scrollTo({
-                        top: targetSection.offsetTop - 70,
-                        behavior: 'smooth'
-                    });
+                    // 显示对应部分
+                    showSection(targetId);
                 });
             });
             
-            // 监听滚动，更新活动导航链接
-            window.addEventListener('scroll', function() {
-                let current = '';
+            // 显示指定部分
+            function showSection(sectionId) {
+                contentSections.forEach(section => {
+                    section.classList.remove('active');
+                });
                 
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.clientHeight;
+                const targetSection = document.getElementById(sectionId);
+                if (targetSection) {
+                    targetSection.classList.add('active');
                     
-                    if (pageYOffset >= (sectionTop - 100)) {
-                        current = section.getAttribute('id');
-                    }
-                });
-                
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === '#' + current) {
-                        link.classList.add('active');
-                    }
-                });
-            });
-            
-            // 初始加载时激活第一个导航项
-            if (window.location.hash) {
-                const targetLink = document.querySelector(`.nav-link[href="${window.location.hash}"]`);
-                if (targetLink) {
-                    navLinks.forEach(link => link.classList.remove('active'));
-                    targetLink.classList.add('active');
+                    // 滚动到顶部
+                    targetSection.scrollTop = 0;
                 }
             }
             
-            // 原有的动画效果
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            });
-
-            sections.forEach(section => {
-                section.style.opacity = '0';
-                section.style.transform = 'translateY(20px)';
-                section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                observer.observe(section);
-            });
-
-            // 添加鼠标悬停效果
-            const sectionContents = document.querySelectorAll('.section-content');
-            sectionContents.forEach(content => {
-                content.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-5px)';
-                });
-                
-                content.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0)';
-                });
-            });
+            // 禁用页面滚动
+            document.body.style.overflow = 'hidden';
         });
     </script>
 </body>
