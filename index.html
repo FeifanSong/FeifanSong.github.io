@@ -91,59 +91,6 @@
             overflow: hidden;
         }
 
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 25px;
-        }
-        
-        .social-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            color: white;
-            font-size: 1.5rem;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            position: relative;
-        }
-        
-        .scholar {
-            background: #4285F4;
-        }
-        
-        .github {
-            background: #333;
-        }
-        
-        .social-link:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .social-tooltip {
-            position: absolute;
-            bottom: -35px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            opacity: 0;
-            transition: opacity 0.3s;
-            white-space: nowrap;
-        }
-        
-        .social-link:hover .social-tooltip {
-            opacity: 1;
-        }
-
         .link-item {
             margin: 15px 0;
             padding: 15px;
@@ -542,16 +489,8 @@
             <section id="home" class="content-section active">
                 <div class="section-header">
                     <h2 class="section-title">🎓 Feifan Song</h2>
-                    <div class="social-links">
-                    <a href="https://scholar.google.com/citations?user=-rP2rucAAAAJ&hl=zh-CN" class="social-link scholar" target="_blank">
-                    <i class="fas fa-graduation-cap"></i>
-                    <span class="social-tooltip">Google Scholar</span>
-                    </a>
-                    <a href="https://github.com/FeifanSong" class="social-link github" target="_blank">
-                    <i class="fab fa-github"></i>
-                    <span class="social-tooltip">GitHub</span>
-                    </a>
-                    </div>
+                    <a href="https://scholar.google.com/citations?user=-rP2rucAAAAJ&hl=zh-CN"> Google Scholar </a>
+                    <a href=""> Github </a>
                 </div>
                 <div class="section-bg" style="background-image: url('img/Beginning.jpg');"></div>
                 <div class="section-content">
@@ -571,7 +510,7 @@
                     <h2 class="section-title">📚 PUBLICATIONS & PATENTS</h2>
                 </div>
                 <div class="section-content">
-<!--                         <p><strong>[1]</strong> <strong>Feifan Song</strong>, Ziming Cheng, Lunbo Li, Haofeng Zhang. MTPNet: Learning Multiple Twin-support Prototypes for Few-shot Medical Image Segmentation. 2024 IEEE International Conference on Bioinformatics and Biomedicine (BIBM), 2024.</p>
+<!--                    <p><strong>[1]</strong> <strong>Feifan Song</strong>, Ziming Cheng, Lunbo Li, Haofeng Zhang. MTPNet: Learning Multiple Twin-support Prototypes for Few-shot Medical Image Segmentation. 2024 IEEE International Conference on Bioinformatics and Biomedicine (BIBM), 2024.</p>
                         <p><strong>[2]</strong> <strong>Feifan Song</strong>, Haofeng Zhang. Leveraging Language to Generalize Few-shot Natural Image segmentation to Medical Images. Submitted to Pattern Recognition Letters, 2025.</p>
                         <p><strong>[3]</strong> Yuanwu Xu, <strong>Feifan Song</strong>, Haofeng Zhang. Learning Spatial Similarity Distribution for Few-shot Object Counting. International Joint Conference on Artificial Intelligence (IJCAI), 2024, arXic.2405.11770.</p>
                         <p><strong>[4]</strong> Yuyan Shi, Chenyi Jiang, <strong>Feifan Song</strong>, Qiaolin Ye, Yang Long, Haofeng Zhang. Multi-domain feature-enhanced attribute updater for generalized zero-shot learning. Neural Computing and Application 37, 8397–8414 (2025).</p>
@@ -579,20 +518,22 @@
                         <p><strong>[6]</strong> <strong>Feifan Song</strong>, Haofeng Zhang. A few-shot medical image segmentation method based on dual attention mechanism and multi-scale fusion. [P] 202410733380.3 (Chinese Patent)</p> -->
                     <div class="publication-item">
                         <strong>[1]</strong> <strong>Feifan Song</strong>, Ziming Cheng, Lunbo Li, Haofeng Zhang. MTPNet: Learning Multiple Twin-support Prototypes for Few-shot Medical Image Segmentation. 2024 IEEE International Conference on Bioinformatics and Biomedicine (BIBM), 2024.
-                        <div class="link-item">
-                            <a href="https://ieeexplore.ieee.org/abstract/document/10821941/">paper</a>
-                            <a href="https://github.com/Lilacis/CD_TG">github</a>
-                        </div>
+                        <a href="https://ieeexplore.ieee.org/abstract/document/10821941/">paper</a>
+                        <a href="https://github.com/FeifanSong/MTPNet">code</a>
                     </div>
                     <div class="publication-item">
                         <strong>[2]</strong> <strong>Feifan Song</strong>, Haofeng Zhang. Leveraging Language to Generalize Few-shot Natural Image segmentation to Medical Images. Submitted to Pattern Recognition Letters, 2025.
-                        
+                        <a href="https://github.com/Lilacis/CD_TG">code</a>
                     </div>
                     <div class="publication-item">
                         <strong>[3]</strong> Yuanwu Xu, <strong>Feifan Song</strong>, Haofeng Zhang. Learning Spatial Similarity Distribution for Few-shot Object Counting. International Joint Conference on Artificial Intelligence (IJCAI), 2024, arXic.2405.11770.
+                        <a href="https://arxiv.org/abs/2405.11770">paper</a>
+                        <a href="https://github.com/CBalance/SSD">code</a>
                     </div>
                     <div class="publication-item">
                         <strong>[4]</strong> Yuyan Shi, Chenyi Jiang, <strong>Feifan Song</strong>, Qiaolin Ye, Yang Long, Haofeng Zhang. Multi-domain feature-enhanced attribute updater for generalized zero-shot learning. Neural Computing and Application 37, 8397–8414 (2025).
+                        <a href="https://link.springer.com/article/10.1007/s00521-025-11005-y">paper</a>
+                        <a href="https://github.com/S-Silvia/MDAU">code</a>
                     </div>
                     <div class="publication-item">
                         <strong>[5]</strong> <strong>Feifan Song</strong>, Haofeng Zhang. A few-shot medical image segmentation method based on text semantic guidance. [P] 202410733385.6 (Chinese Patent)
