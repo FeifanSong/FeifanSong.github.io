@@ -91,6 +91,59 @@
             overflow: hidden;
         }
 
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 25px;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            position: relative;
+        }
+        
+        .scholar {
+            background: #4285F4;
+        }
+        
+        .github {
+            background: #333;
+        }
+        
+        .social-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .social-tooltip {
+            position: absolute;
+            bottom: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+            white-space: nowrap;
+        }
+        
+        .social-link:hover .social-tooltip {
+            opacity: 1;
+        }
+
         .content-wrapper {
             position: relative;
             width: 100%;
@@ -473,14 +526,24 @@
                 <div class="section-header">
                     <h2 class="section-title">🎓 Feifan Song</h2>
                 </div>
+                <div class="social-links">
+                <a href="https://scholar.google.com/citations?user=-rP2rucAAAAJ&hl=zh-CN" class="social-link scholar" target="_blank">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span class="social-tooltip">Google Scholar</span>
+                </a>
+                <a href="https://github.com/FeifanSong" class="social-link github" target="_blank">
+                    <i class="fab fa-github"></i>
+                    <span class="social-tooltip">GitHub</span>
+                </a>
+                </div>
                 <div class="section-bg" style="background-image: url('img/Beginning.jpg');"></div>
                 <div class="section-content">
                     <div class="content-item fade-in">
                     <p><strong> Welcome to my wensite!!!</strong></p>
                     I recently completed my Bachelor’s degree in Computer Science at Nanjing University of Science and Technology, graduating with <strong>First-Class Honours</strong>.
-                    My research has focused on few-shot learning and cross-modal generalization, with first-author papers published at venues such as IEEE BIBM and Pattern Recognition Letters. 
+                    My research has focused on <strong>few-shot learning and cross-modal generalization</strong>, with first-author papers published at venues such as IEEE BIBM and Pattern Recognition Letters. 
                     However, I am broadly interested in vision problems and actively seeking opportunities for a PHD or Mres degree. 
-                    <p>I always welcome discussions or collaborations on interesting ideas! Feel free to reach out to me via email.</p>
+                    <p><h3> Welcome discussions or collaborations on interesting ideas! Feel free to reach out to me via email.</h3></p>
                     </div>
                 </div>
             </section>
@@ -710,7 +773,7 @@
                     <h2 class="section-title">🎭 INTERESTS & ACTIVITIES</h2>
                 </div>
                 <div class="section-bg" style="background-image: url('img/Extracurricular activity.jpg');"></div>
-                <div class="extracurricular-section">
+                <div class="section-content">
                     <div class="research-item">
                         <h3>Stage Manager | The play 'Dedication' of NJUST</h3>
                         <span class="date">06. 2023 – 09. 2023</span>
