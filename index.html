@@ -21,6 +21,64 @@
             overflow-x: hidden;
         }
 
+        /* 导航栏样式 */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(44, 62, 80, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.2);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+        }
+
+        .nav-list {
+            display: flex;
+            list-style: none;
+            padding: 0;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 18px 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            background: rgba(52, 152, 219, 0.2);
+        }
+
+        .nav-link.active {
+            background: #3498db;
+            color: white;
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 3px;
+            background: white;
+            border-radius: 3px;
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -83,6 +141,7 @@
             border-bottom: 1px solid #eee;
             position: relative;
             overflow: hidden;
+            scroll-margin-top: 70px;
         }
    
         .section-bg {
@@ -356,6 +415,16 @@
             .section-bg {
                 height: 30%;
             }
+            
+            .nav-list {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-link {
+                padding: 12px 15px;
+                font-size: 0.9em;
+            }
         }
 
         .fade-in {
@@ -387,24 +456,23 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header Section -->
-        <div class="header">
-            <div class="header-content">
-                <h1>Feifan Song</h1>
-                <div class="contact-info">
-                    <span>📞 +86 18851076705</span>
-                    <span>📧 sff@njust.edu.cn</span>
-                    <span>📧 feifansong75@gmail.com</span>
-                    <span>📍 Nanjing, China</span>
-                </div>
-            </div>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <ul class="nav-list">
+                <li class="nav-item"><a href="#home" class="nav-link active">Home</a></li>
+                <li class="nav-item"><a href="#publication" class="nav-link">Publication</a></li>
+                <li class="nav-item"><a href="#research" class="nav-link">Research</a></li>
+                <li class="nav-item"><a href="#cv" class="nav-link">CV</a></li>
+                <li class="nav-item"><a href="#interest" class="nav-link">Interest</a></li>
+            </ul>
         </div>
+    </nav>
 
-        <!-- Education Section -->
-        <div class="section fade-in">
-         <!--<div class="section-bg" style="background-image: url('img/Publication&patents.png');"></div> -->
-             <div class="section-bg" style="background-image: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');"></div>
+    <div class="container">
+        <!-- Home Section (原Education Section) -->
+        <div id="home" class="section fade-in">
+            <div class="section-bg" style="background-image: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');"></div>
             <div class="section-content">
                 <h2 class="section-title">🎓 EDUCATION</h2>
                 <div class="education-item">
@@ -420,8 +488,8 @@
             </div>
         </div>
 
-        <!-- Publications & Patents Section -->
-        <div class="section fade-in">
+        <!-- Publication Section (原Publications & Patents Section) -->
+        <div id="publication" class="section fade-in">
             <div class="section-bg" style="background-image: url('img/Publication&patents.png');"></div>
             <div class="section-content">
                 <h2 class="section-title">📚 PUBLICATIONS & PATENTS</h2>
@@ -448,8 +516,8 @@
             </div>
         </div>
 
-        <!-- Research Experience Section -->
-        <div class="section fade-in">
+        <!-- Research Section (原Research Experience Section) -->
+        <div id="research" class="section fade-in">
             <div class="section-bg" style="background-image: url('img/Research Experience.jpg');"></div>
             <div class="section-content">
                 <h2 class="section-title">🔬 RESEARCH EXPERIENCES</h2>
@@ -550,8 +618,8 @@
             </div>
         </div>
 
-        <!-- Internships Section -->
-        <div class="section fade-in">
+        <!-- CV Section (Internship + International Summer Programs + Honours & Awards) -->
+        <div id="cv" class="section fade-in">
             <div class="section-bg" style="background-image: url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');"></div>
             <div class="section-content">
                 <h2 class="section-title">💼 INTERNSHIPS</h2>
@@ -581,11 +649,35 @@
                     </ul>
                 </div>
             </div>
-        </div>
-
-        <!-- Honours & Awards Section -->
-        <div class="section fade-in">
-            <div class="section-bg" style="background-image: url('https://images.unsplash.com/photo-1614732414444-096e5f1122d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80');"></div>
+            
+            <!-- International Summer Programs -->
+            <div class="section-content">
+                <h2 class="section-title">🌍 INTERNATIONAL SUMMER PROGRAMS</h2>
+                <div class="section-with-image">
+                    <div class="section-content">
+                        <div class="international-section">
+                            <div class="education-item">
+                                <h3>National University of Singapore (NUS)</h3>
+                                <p><strong>Supervisor:</strong> Susanna Leong, Professor</p>
+                                <ul>
+                                    <li><strong>Jul. 2022:</strong> Robotics Automation and Intelligent Machines (Summer Course)</li>
+                                    <li><strong>Jul. 2024:</strong> Artificial Intelligence and Machine Learning (Summer Course)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="section-image-container">
+                        <img src="img/International summer programs.jpg" alt="International Summer Programs" class="section-image-large">
+                    </div>
+                </div>
+                
+                <!-- 添加的自适应文字框 -->
+                <div class="memory-text">
+                    <p>I am extremely grateful to my fourth group at NUS for completing a final project on demographic intelligence statistics with them and ultimately receiving praise from the professor. I still remember that the five of us spent the whole night at the Starbucks outside the hotel, all full of enthusiasm. This is a wonderful memory of mine.</p>
+                </div>
+            </div>
+            
+            <!-- Honours & Awards -->
             <div class="section-content">
                 <h2 class="section-title">🏆 HONOURS & AWARDS</h2>
                 <div class="awards-grid">
@@ -618,37 +710,8 @@
             </div>
         </div>
 
-        <!-- International Summer Programs Section -->
-<div class="section fade-in">
-    <h2 class="section-title">🌍 INTERNATIONAL SUMMER PROGRAMS</h2>
-    <div class="section-with-image">
-        <div class="section-content">
-            <div class="international-section">
-                <div class="education-item">
-                    <h3>National University of Singapore (NUS)</h3>
-                    <p><strong>Supervisor:</strong> Susanna Leong, Professor</p>
-                    <ul>
-                        <li><strong>Jul. 2022:</strong> Robotics Automation and Intelligent Machines (Summer Course)</li>
-                        <li><strong>Jul. 2024:</strong> Artificial Intelligence and Machine Learning (Summer Course)</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="section-image-container">
-            <img src="img/International summer programs.jpg" alt="International Summer Programs" class="section-image-large">
-        </div>
-    </div>
-    
-    <!-- 添加的自适应文字框 -->
-    <div class="memory-text">
-        <p>I am extremely grateful to my fourth group at NUS for completing a final project on demographic intelligence statistics with them and ultimately receiving praise from the professor. I still remember that the five of us spent the whole night at the Starbucks outside the hotel, all full of enthusiasm. This is a wonderful memory of mine.</p>
-    </div>
-</div>
-
-
-        
-        <!-- Extracurricular Activities Section -->
-        <div class="section fade-in">
+        <!-- Interest Section (Extracurricular Activities + Skills & Interests) -->
+        <div id="interest" class="section fade-in">
             <div class="section-bg" style="background-image: url('img/Extracurricular activity.jpg');"></div>
             <div class="section-content">
                 <h2 class="section-title">🎭 EXTRACURRICULAR ACTIVITIES</h2>
@@ -682,10 +745,8 @@
 
                 “I see those endless, bustling crowds—appearing and vanishing. Struggle, monotony, humility, and poverty are drama; generosity, radiance, pride, and wealth are theatre. For humanity, in its perpetual ignorance, forever breeds conflict; and because all must eventually fade, there will always be climax.” Thus I wrote in my director’s journal.</p>
             </div>
-        </div>
-        <!-- Skills & Interests Section -->
-        <div class="section fade-in">
-            <div class="section-bg" style="background-image: url('img/skills&Interest.jpg');"></div>
+            
+            <!-- Skills & Interests -->
             <div class="section-content">
                 <h2 class="section-title">💡 SKILLS & INTERESTS</h2>
                 <div class="skills-section">
@@ -715,12 +776,63 @@
         </div>           
     </div>
 
-
     <script>
-        // Add smooth scrolling and animation effects
+        // 导航栏交互功能
         document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
             const sections = document.querySelectorAll('.section');
             
+            // 平滑滚动到对应部分
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    
+                    // 更新活动链接
+                    navLinks.forEach(navLink => navLink.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // 平滑滚动到目标部分
+                    window.scrollTo({
+                        top: targetSection.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // 监听滚动，更新活动导航链接
+            window.addEventListener('scroll', function() {
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (pageYOffset >= (sectionTop - 100)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + current) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+            
+            // 初始加载时激活第一个导航项
+            if (window.location.hash) {
+                const targetLink = document.querySelector(`.nav-link[href="${window.location.hash}"]`);
+                if (targetLink) {
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    targetLink.classList.add('active');
+                }
+            }
+            
+            // 原有的动画效果
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -729,8 +841,6 @@
                     }
                 });
             });
-
-        // 修改视差滚动效果
 
             sections.forEach(section => {
                 section.style.opacity = '0';
@@ -751,7 +861,6 @@
                 });
             });
         });
-
-</script>
+    </script>
 </body>
 </html>
